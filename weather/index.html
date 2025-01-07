@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Rubik+Vinyl&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="video-background">
+        <video autoplay muted loop id="background-video">
+            <source src="images\vecteezy_soap-bubbles-floating-in-the-air-with-natural-green-blurred_14927511.mov" type="video/mp4">
+            </video>
+    </div>
+    <div id="weather-app">
+        <header>
+            <h1>Weather Forecast</h1>
+            <input type="text" id="location" placeholder="Enter city name" />
+            <div class="button-container">
+                <button class="funky-button" onclick="fetchWeather()">Get Weather</button>
+                <button class="funky-button" onclick="getCurrentLocationWeather()">Get Current Location Weather</button>
+            </div>
+        </header>
+        <section id="weather-info">
+            <div id="current-weather">
+                <img id="weather-icon" alt="Weather Icon" style="width: 130px; height: 130px; display: block; margin: 10px auto;" />
+                <p id="temperature"></p>
+                <p id="cloud-cover"></p>
+                <p id="precipitation"></p>
+                <p id="sunrise-sunset"></p>
+                <p id="air-quality"></p>
+            </div>
+        </section>
+    </div>
+    
+    <script src="app.js"></script>
+</body>
+</html>
