@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Croissants | Sweet Delights</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .toast {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background-color: #caae62;
+      color: white;
+      padding: 1rem 1.5rem;
+      border-radius: 10px;
+      font-weight: bold;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease, transform 0.4s ease;
+      transform: translateY(20px);
+      z-index: 999;
+    }
+
+    .toast.show {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    .quantity-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin: 10px 0;
+    }
+
+    .quantity-container input[type="number"] {
+      width: 60px;
+      padding: 5px;
+      border: 1px solid #caae62;
+      border-radius: 5px;
+      text-align: center;
+    }
+
+    .price {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <header class="navbar">
+    <div class="logo">
+      <img src="images/bakery.png" alt="Bakery Logo">
+      Sweet Delights
+    </div>
+  </header>
+
+  <section class="featured">
+    <h2>Flaky & Buttery Croissants</h2>
+    <div class="product-grid">
+
+      <!-- Butter Croissant -->
+      <div class="product-card" data-price="70">
+        <img src="images/classic_croissant.jpg" alt="Butter Croissant">
+        <h3>Butter Croissant</h3>
+        <p>Golden, flaky croissant made with rich French butter.</p>
+        <div class="quantity-container">
+          <input type="number" min="1" value="1" onchange="updatePrice(this)">
+        </div>
+        <p class="price"><strong>₹70</strong></p>
+        <button onclick="addToCart(this, 'Butter Croissant')">Order</button>
+      </div>
+
+      <!-- Almond Croissant -->
+      <div class="product-card" data-price="90">
+        <img src="images/almond_croissant.jpg" alt="Almond Croissant">
+        <h3>Almond Croissant</h3>
+        <p>Stuffed with almond paste and topped with crunchy flakes.</p>
+        <div class="quantity-container">
+          <input type="number" min="1" value="1" onchange="updatePrice(this)">
+        </div>
+        <p class="price"><strong>₹90</strong></p>
+        <button onclick="addToCart(this, 'Almond Croissant')">Order</button>
+      </div>
+
+      <!-- Chocolate Croissant -->
+      <div class="product-card" data-price="95">
+        <img src="images/choco_croissant.jpg" alt="Chocolate Croissant">
+        <h3>Chocolate Croissant</h3>
+        <p>Filled with rich chocolate and baked to perfection.</p>
+        <div class="quantity-container">
+          <input type="number" min="1" value="1" onchange="updatePrice(this)">
+        </div>
+        <p class="price"><strong>₹95</strong></p>
+        <button onclick="addToCart(this, 'Chocolate Croissant')">Order</button>
+      </div>
+
+      <!-- Cheese Croissant -->
+      <div class="product-card" data-price="85">
+        <img src="images/cheese_croissant.jpg" alt="Cheese Croissant">
+        <h3>Cheese Croissant</h3>
+        <p>Savory delight filled with melted cheese in every layer.</p>
+        <div class="quantity-container">
+          <input type="number" min="1" value="1" onchange="updatePrice(this)">
+        </div>
+        <p class="price"><strong>₹85</strong></p>
+        <button onclick="addToCart(this, 'Cheese Croissant')">Order</button>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <p>&copy; 2025 <strong>Sweet Delights Bakery</strong> | Made with ❤️ and butter.</p>
+    </div>
+  </footer>
+
+  <div id="toast" class="toast"></div>
+
+  <script>
+    function updatePrice(inputElement) {
+      const card = inputElement.closest(".product-card");
+      const basePrice = parseInt(card.dataset.price);
+      const quantity = parseInt(inputElement.value) || 1;
+      const updatedPrice = basePrice * quantity;
+      const priceDisplay = card.querySelector(".price");
+      priceDisplay.innerHTML = `<strong>₹${updatedPrice}</strong>`;
+    }
+
+    function addToCart(button, itemName) {
+      const card = button.closest(".product-card");
+      const quantity = parseInt(card.querySelector('input[type="number"]').value) || 1;
+      const unitPrice = parseInt(card.dataset.price);
+      const totalPrice = unitPrice * quantity;
+
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      cart.push({ name: itemName, quantity, total: totalPrice });
+      localStorage.setItem("cart", JSON.stringify(cart));
+
+      showToast(`${quantity} x ${itemName} added! ₹${totalPrice}`);
+    }
+
+    function showToast(message) {
+      const toast = document.getElementById("toast");
+      toast.textContent = message;
+      toast.classList.add("show");
+      setTimeout(() => {
+        toast.classList.remove("show");
+      }, 2500);
+    }
+  </script>
+</body>
+</html>

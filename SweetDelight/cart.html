@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Cart | Sweet Delights</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    body {
+      background-color: #fff6ea;
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header.navbar {
+      background-color: #caae62;
+      padding: 1rem;
+      display: flex;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      font-weight: bold;
+      font-size: 1.5rem;
+      color: white;
+    }
+
+    .logo img {
+      width: 40px;
+      margin-right: 10px;
+    }
+
+    main {
+      flex: 1;
+      padding: 2rem;
+    }
+
+    h2 {
+      text-align: center;
+      color: #4a2f0b;
+    }
+
+    .cart-item {
+      background: white;
+      margin: 1rem auto;
+      padding: 1rem;
+      border-radius: 10px;
+      max-width: 600px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .cart-item-details {
+      flex: 1;
+    }
+
+    .cart-item-name {
+      font-weight: bold;
+      font-size: 1.2rem;
+      margin-bottom: 5px;
+      color: #caae62;
+    }
+
+    .cart-item-weight, .cart-item-price {
+      font-size: 1rem;
+      color: #4a2f0b;
+    }
+
+    .remove-btn {
+      background-color: #ff4d4d;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      font-size: 0.9rem;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .remove-btn:hover {
+      background-color: #e74c3c;
+    }
+
+    #cart-total {
+      text-align: center;
+      margin-top: 2rem;
+      font-size: 1.5rem;
+      color: #4a2f0b;
+      font-weight: bold;
+    }
+
+    .empty-cart {
+      text-align: center;
+      font-size: 1.2rem;
+      margin-top: 3rem;
+      color: #999;
+    }
+
+    .clear-cart-btn {
+      display: block;
+      margin: 2rem auto;
+      background-color: #caae62;
+      color: white;
+      border: none;
+      padding: 0.8rem 2rem;
+      font-size: 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .clear-cart-btn:hover {
+      background-color: #a68f4d;
+    }
+
+    footer {
+      background-color: #caae62;
+      text-align: center;
+      padding: 1rem;
+      color: white;
+      font-size: 0.9rem;
+    }
+
+    .place-order-btn {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 0.8rem 2rem;
+      font-size: 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s;
+      margin-top: 1rem;
+    }
+    
+    .place-order-btn:hover {
+      background-color: #45a049;
+    }
+
+    .popup-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.4);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+    
+    .popup-content {
+      background: #fff7f0;
+      padding: 2rem 3rem;
+      border-radius: 15px;
+      text-align: center;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+      animation: popupFadeIn 0.4s ease;
+    }
+    
+    .popup-content h2 {
+      color: #a0522d;
+      margin-bottom: 1rem;
+    }
+    
+    .popup-content p {
+      color: #333;
+      font-size: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    .popup-btn {
+      background-color: #d4a373;
+      color: white;
+      border: none;
+      padding: 0.7rem 2rem;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    
+    .popup-btn:hover {
+      background-color: #c58f5c;
+    }
+    
+    @keyframes popupFadeIn {
+      from {
+        transform: scale(0.8);
+        opacity: 0;
+      }
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+    
+    
+
+  </style>
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="logo">
+      <img src="images/bakery.png" alt="Bakery Logo">
+      Sweet Delights
+    </div>
+  </header>
+
+  <main>
+    <h2>Your Cart</h2>
+
+    <div id="cart-items"></div>
+    <div id="cart-total"></div>
+
+    <div style="text-align: center; margin-top: 1rem;">
+      <button class="place-order-btn" onclick="placeOrder()">Place Order</button>
+    </div>
+
+    <div id="thankYouPopup" class="popup-overlay">
+      <div class="popup-content">
+        <h2>Thank You! 🎉</h2>
+        <p>Your order has been placed successfully.</p>
+        <button onclick="goHome()" class="popup-btn">Go to Home</button>
+      </div>
+    </div>
+    
+    </main>
+  
+  <footer>
+    <p>&copy; 2025 Sweet Delights Bakery. All rights reserved.</p>
+  </footer>
+
+  <script>
+    function loadCart() {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const cartItemsContainer = document.getElementById('cart-items');
+      const cartTotal = document.getElementById('cart-total');
+
+      cartItemsContainer.innerHTML = '';
+      
+      if (cart.length === 0) {
+        cartItemsContainer.innerHTML = '<p class="empty-cart">Your cart is empty. Add some sweet treats!</p>';
+        cartTotal.textContent = '';
+        return;
+      }
+
+      let total = 0;
+
+      cart.forEach((item, index) => {
+        const cartItemDiv = document.createElement('div');
+        cartItemDiv.className = 'cart-item';
+        cartItemDiv.innerHTML = `
+          <div class="cart-item-details">
+            <div class="cart-item-name">${item.name}</div>
+            
+            <div class="cart-item-price">Price: ₹${item.price}</div>
+          </div>
+          <button class="remove-btn" onclick="removeFromCart(${index})">Remove</button>
+        `;
+        cartItemsContainer.appendChild(cartItemDiv);
+
+        total += item.price;
+      });
+
+      cartTotal.textContent = `Total: ₹${total.toFixed(2)}`;
+    }
+
+    function clearCart() {
+      if (confirm('Are you sure you want to clear your cart?')) {
+        localStorage.removeItem('cart');
+        loadCart();
+      }
+    }
+
+    function removeFromCart(index) {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      cart.splice(index, 1); // Remove item at specified index
+      localStorage.setItem('cart', JSON.stringify(cart));
+      loadCart(); // Re-render the cart after removing the item
+    }
+
+    // Load cart when page opens
+    window.onload = loadCart;
+
+    function placeOrder() {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      
+      if (cart.length === 0) {
+        alert('Your cart is empty. Please add items before placing an order.');
+        return;
+      }
+    
+      if (confirm('Are you sure you want to place the order?')) {
+        localStorage.removeItem('cart');
+        alert('Thank you for your order! Your delicious treats are on the way!');
+        window.location.href = 'thankyou.html'; // Redirect to a Thank You page (optional)
+      }
+    }
+    
+    function placeOrder() {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      
+      if (cart.length === 0) {
+        alert('Your cart is empty. Please add items before placing an order.');
+        return;
+      }
+    
+      if (confirm('Are you sure you want to place the order?')) {
+        localStorage.removeItem('cart');
+        document.getElementById('thankYouPopup').style.display = 'flex';
+      }
+    }
+    
+    function goHome() {
+      window.location.href = 'index.html'; // Replace with your Home Page URL
+    }
+    
+  </script>
+
+</body>
+</html>

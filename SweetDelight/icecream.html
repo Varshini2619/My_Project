@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ice Creams | Sweet Delights</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .toast {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background-color: #caae62;
+      color: white;
+      padding: 1rem 1.5rem;
+      border-radius: 10px;
+      font-weight: bold;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease, transform 0.4s ease;
+      transform: translateY(20px);
+      z-index: 999;
+    }
+
+    .toast.show {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    .product-card input[type="number"] {
+      margin-top: 8px;
+      padding: 4px;
+      width: 60px;
+    }
+  </style>
+</head>
+<body>
+  <header class="navbar">
+    <div class="logo">
+      <img src="images/bakery.png" alt="Bakery Logo">
+      Sweet Delights
+    </div>
+  </header>
+
+  <section class="featured">
+    <h2>Our Ice Cream Delights</h2>
+    <div class="product-grid">
+
+      <!-- Vanilla Scoop -->
+      <div class="product-card">
+        <img src="images/vanillaice.jpg" alt="Vanilla Ice Cream">
+        <h3>Vanilla Scoop</h3>
+        <p>Classic creamy vanilla made with real vanilla beans.</p>
+        <p><strong>₹80</strong></p>
+        <input type="number" id="qty1" min="1" value="1" />
+        <button onclick="addToCart('Vanilla Ice Cream', 80, 'qty1')">Order</button>
+      </div>
+
+      <!-- Chocolate Scoop -->
+      <div class="product-card">
+        <img src="images/chocolate_icecream.jpg" alt="Chocolate Ice Cream">
+        <h3>Chocolate Scoop</h3>
+        <p>Rich, velvety chocolate ice cream for chocoholics.</p>
+        <p><strong>₹85</strong></p>
+        <input type="number" id="qty2" min="1" value="1" />
+        <button onclick="addToCart('Chocolate Ice Cream', 85, 'qty2')">Order</button>
+      </div>
+
+      <!-- Strawberry Scoop -->
+      <div class="product-card">
+        <img src="images/strawberry.jpg" alt="Strawberry Ice Cream">
+        <h3>Strawberry Scoop</h3>
+        <p>Fruity, sweet strawberry ice cream made fresh.</p>
+        <p><strong>₹85</strong></p>
+        <input type="number" id="qty3" min="1" value="1" />
+        <button onclick="addToCart('Strawberry Ice Cream', 85, 'qty3')">Order</button>
+      </div>
+
+      <!-- Butterscotch Delight -->
+      <div class="product-card">
+        <img src="images/butterscotch.jpg" alt="Butterscotch Ice Cream">
+        <h3>Butterscotch Delight</h3>
+        <p>Crunchy bits of butterscotch blended into smooth cream.</p>
+        <p><strong>₹90</strong></p>
+        <input type="number" id="qty4" min="1" value="1" />
+        <button onclick="addToCart('Butterscotch Ice Cream', 90, 'qty4')">Order</button>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <p>&copy; 2025 <strong>Sweet Delights Bakery</strong> | Made with ❤️ and butter.</p>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    function addToCart(itemName, itemPrice, qtyId) {
+      const quantity = parseInt(document.getElementById(qtyId).value);
+      const totalPrice = itemPrice * quantity;
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      cart.push({ name: itemName, price: totalPrice, quantity });
+      localStorage.setItem("cart", JSON.stringify(cart));
+      showToast(`${itemName} (x${quantity}) added to your order!`);
+    }
+
+    function showToast(message) {
+      const toast = document.getElementById("toast");
+      toast.textContent = message;
+      toast.classList.add("show");
+      setTimeout(() => toast.classList.remove("show"), 2500);
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cakes | Sweet Delights</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .toast {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background-color: #caae62;
+      color: white;
+      padding: 1rem 1.5rem;
+      border-radius: 10px;
+      font-weight: bold;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease, transform 0.4s ease;
+      transform: translateY(20px);
+      z-index: 999;
+    }
+
+    .toast.show {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    select.dropdown {
+      padding: 8px 12px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      background-color: #fff6ea;
+      font-size: 1rem;
+      color: #4a2f0b;
+      margin: 10px 0;
+      cursor: pointer;
+      transition: border-color 0.3s ease;
+    }
+
+    select.dropdown:focus {
+      border-color: #caae62;
+      outline: none;
+    }
+  </style>
+</head>
+<body>
+  <header class="navbar">
+    <div class="logo">
+      <img src="images/bakery.png" alt="Bakery Logo">
+      Sweet Delights
+    </div>
+  </header>
+
+  <section class="featured">
+    <h2>Our Cakes</h2>
+    <div class="product-grid">
+
+      <!-- Chocolate Cake -->
+      <div class="product-card">
+        <img src="images/cake.jpg" alt="Chocolate Cake">
+        <h3>Chocolate Cake</h3>
+        <p>Rich, moist chocolate layers with ganache.</p>
+        <select class="dropdown" onchange="updatePrice(this)" data-base="350">
+          <option value="0.5">0.5 kg</option>
+          <option value="1" selected>1 kg</option>
+          <option value="1.5">1.5 kg</option>
+          <option value="2">2 kg</option>
+        </select>
+        <p class="price"><strong>₹350</strong></p>
+        <button onclick="addToCart('Chocolate Cake', this)">Order</button>
+      </div>
+
+      <!-- Red Velvet Cake -->
+      <div class="product-card">
+        <img src="images/redvelvet.jpg" alt="Red Velvet Cake">
+        <h3>Red Velvet Cake</h3>
+        <p>Velvety smooth with cream cheese frosting.</p>
+        <select class="dropdown" onchange="updatePrice(this)" data-base="400">
+          <option value="0.5">0.5 kg</option>
+          <option value="1" selected>1 kg</option>
+          <option value="1.5">1.5 kg</option>
+          <option value="2">2 kg</option>
+        </select>
+        <p class="price"><strong>₹400</strong></p>
+        <button onclick="addToCart('Red Velvet Cake', this)">Order</button>
+      </div>
+
+      <!-- Black Forest Cake -->
+      <div class="product-card">
+        <img src="images/blackforest.jpg" alt="Black Forest Cake">
+        <h3>Black Forest Cake</h3>
+        <p>Chocolate cake with cherries and whipped cream.</p>
+        <select class="dropdown" onchange="updatePrice(this)" data-base="380">
+          <option value="0.5">0.5 kg</option>
+          <option value="1" selected>1 kg</option>
+          <option value="1.5">1.5 kg</option>
+          <option value="2">2 kg</option>
+        </select>
+        <p class="price"><strong>₹380</strong></p>
+        <button onclick="addToCart('Black Forest Cake', this)">Order</button>
+      </div>
+
+      <!-- Vanilla Cream Cake -->
+      <div class="product-card">
+        <img src="images/vanilla.jpg" alt="Vanilla Cream Cake">
+        <h3>Vanilla Cream Cake</h3>
+        <p>Soft vanilla sponge with fresh cream layers.</p>
+        <select class="dropdown" onchange="updatePrice(this)" data-base="320">
+          <option value="0.5">0.5 kg</option>
+          <option value="1" selected>1 kg</option>
+          <option value="1.5">1.5 kg</option>
+          <option value="2">2 kg</option>
+        </select>
+        <p class="price"><strong>₹320</strong></p>
+        <button onclick="addToCart('Vanilla Cream Cake', this)">Order</button>
+      </div>
+
+      <!-- Fruit Cake -->
+      <div class="product-card">
+        <img src="images/fruitcake.jpg" alt="Fruit Cake">
+        <h3>Fruit Cake</h3>
+        <p>Loaded with seasonal fruits and whipped topping.</p>
+        <select class="dropdown" onchange="updatePrice(this)" data-base="450">
+          <option value="0.5">0.5 kg</option>
+          <option value="1" selected>1 kg</option>
+          <option value="1.5">1.5 kg</option>
+          <option value="2">2 kg</option>
+        </select>
+        <p class="price"><strong>₹450</strong></p>
+        <button onclick="addToCart('Fruit Cake', this)">Order</button>
+      </div>
+
+      <!-- Cheese Cake -->
+      <div class="product-card">
+        <img src="images/cheesecake.jpg" alt="Cheese Cake">
+        <h3>Cheese Cake</h3>
+        <p>Rich and creamy with a buttery base.</p>
+        <select class="dropdown" onchange="updatePrice(this)" data-base="450">
+          <option value="0.5">0.5 kg</option>
+          <option value="1" selected>1 kg</option>
+          <option value="1.5">1.5 kg</option>
+          <option value="2">2 kg</option>
+        </select>
+        <p class="price"><strong>₹450</strong></p>
+        <button onclick="addToCart('Cheese Cake', this)">Order</button>
+      </div>
+
+      <!-- Strawberry Cake -->
+      <div class="product-card">
+        <img src="images/strawberrycake.jpg" alt="Strawberry Cake">
+        <h3>Strawberry Cake</h3>
+        <p>Light sponge with fresh strawberries.</p>
+        <select class="dropdown" onchange="updatePrice(this)" data-base="450">
+          <option value="0.5">0.5 kg</option>
+          <option value="1" selected>1 kg</option>
+          <option value="1.5">1.5 kg</option>
+          <option value="2">2 kg</option>
+        </select>
+        <p class="price"><strong>₹450</strong></p>
+        <button onclick="addToCart('Strawberry Cake', this)">Order</button>
+      </div>
+
+      <!-- Rasmalai Cake -->
+      <div class="product-card">
+        <img src="images/rasmalaicake.jpg" alt="Rasmalai Cake">
+        <h3>Rasmalai Cake</h3>
+        <p>Fusion delight with Indian flavors.</p>
+        <select class="dropdown" onchange="updatePrice(this)" data-base="450">
+          <option value="0.5">0.5 kg</option>
+          <option value="1" selected>1 kg</option>
+          <option value="1.5">1.5 kg</option>
+          <option value="2">2 kg</option>
+        </select>
+        <p class="price"><strong>₹450</strong></p>
+        <button onclick="addToCart('Rasmalai Cake', this)">Order</button>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Sweet Delights Bakery. All rights reserved.</p>
+  </footer>
+
+  <div id="toast" class="toast"></div>
+
+  <script>
+    function updatePrice(selectEl) {
+      const basePrice = parseFloat(selectEl.getAttribute("data-base"));
+      const selectedWeight = parseFloat(selectEl.value);
+      const updatedPrice = basePrice * selectedWeight;
+
+      const card = selectEl.closest(".product-card");
+      const priceEl = card.querySelector(".price strong");
+      priceEl.textContent = `₹${updatedPrice}`;
+    }
+
+    function addToCart(itemName, btn) {
+      const card = btn.closest(".product-card");
+      const select = card.querySelector("select");
+      const weight = select.value;
+      const basePrice = parseFloat(select.getAttribute("data-base"));
+      const price = basePrice * parseFloat(weight);
+
+      const cart = JSON.parse(localStorage.getItem("cart")) || [];
+      cart.push({ name: itemName, weight: `${weight} kg`, price });
+      localStorage.setItem("cart", JSON.stringify(cart));
+
+      showToast(`${itemName} (${weight} kg) added to your order!`);
+    }
+
+    function showToast(message) {
+      const toast = document.getElementById("toast");
+      toast.textContent = message;
+      toast.classList.add("show");
+      setTimeout(() => {
+        toast.classList.remove("show");
+      }, 2500);
+    }
+  </script>
+</body>
+</html>

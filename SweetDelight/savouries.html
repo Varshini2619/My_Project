@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Savouries | Sweet Delights</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .custom-alert {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background-color: #caae62;
+      color: #fff;
+      padding: 1rem 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+      z-index: 1000;
+      font-weight: bold;
+      animation: fadeOut 2s ease-in-out forwards;
+    }
+    @keyframes fadeOut {
+      0% { opacity: 1; }
+      80% { opacity: 1; }
+      100% { opacity: 0; transform: translateY(-20px); }
+    }
+
+    .qty-price {
+      display: flex;
+      align-items: center;
+      justify-content: center; /* Center horizontally */
+      margin-top: 0.5rem;
+    }
+
+    .qty-price input {
+      width: 60px;
+      padding: 0.3rem;
+      text-align: center;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .qty-price p {
+      font-weight: bold;
+      color: #333;
+      margin: 0;
+      margin-left: 10px; /* Adds space between the input and price */
+    }
+
+    .product-card p.price {
+      margin-top: 0.5rem;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .product-card {
+      margin-bottom: 1rem;
+      text-align: center; /* Center-align text within the product card */
+    }
+  </style>
+</head>
+<body>
+  <header class="navbar">
+    <div class="logo">
+      <img src="images/bakery.png" alt="Bakery Logo">
+      Sweet Delights
+    </div>
+  </header>
+
+  <section class="featured">
+    <h2>Our Savoury Picks</h2>
+    <div class="product-grid">
+
+      <!-- Savoury Items -->
+      <div class="product-card">
+        <img src="images/cheese_roll.jpg" alt="Cheese Roll">
+        <h3>Cheese Roll</h3>
+        <p>Crispy puff pastry stuffed with rich cheese filling.</p>
+        <div class="qty-price">
+          <input type="number" min="1" value="1" onchange="updatePrice(this, 50, 'price1')">
+          <p class="price" id="price1">₹50</p>
+        </div>
+        <button onclick="addToCart('Cheese Roll', 50, 'price1', 'qty1')" id="qty1">Order</button>
+      </div>
+
+      <div class="product-card">
+        <img src="images/veg_puff.jpg" alt="Veg Puff">
+        <h3>Veg Puff</h3>
+        <p>Spiced veggies wrapped in flaky puff pastry.</p>
+        <div class="qty-price">
+          <input type="number" min="1" value="1" onchange="updatePrice(this, 40, 'price2')">
+          <p class="price" id="price2">₹40</p>
+        </div>
+        <button onclick="addToCart('Veg Puff', 40, 'price2', 'qty2')" id="qty2">Order</button>
+      </div>
+
+      <div class="product-card">
+        <img src="images/frenchfries.jpg" alt="French fries">
+        <h3>French Fries</h3>
+        <p>Buttery tart shell with cheesy spinach filling.</p>
+        <div class="qty-price">
+          <input type="number" min="1" value="1" onchange="updatePrice(this, 65, 'price3')">
+          <p class="price" id="price3">₹65</p>
+        </div>
+        <button onclick="addToCart('French fries', 65, 'price3', 'qty3')" id="qty3">Order</button>
+      </div>
+
+      <div class="product-card">
+        <img src="images/chicken_pie.jpg" alt="Chicken Pie">
+        <h3>Chicken Pie</h3>
+        <p>Golden crust filled with creamy chicken delight.</p>
+        <div class="qty-price">
+          <input type="number" min="1" value="1" onchange="updatePrice(this, 80, 'price4')">
+          <p class="price" id="price4">₹80</p>
+        </div>
+        <button onclick="addToCart('Chicken Pie', 80, 'price4', 'qty4')" id="qty4">Order</button>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <p>&copy; 2025 <strong>Sweet Delights Bakery</strong> | Made with ❤️ and butter.</p>
+    </div>
+  </footer>
+
+  <script>
+    function updatePrice(inputElem, unitPrice, priceId) {
+      const quantity = parseInt(inputElem.value);
+      const total = unitPrice * quantity;
+      document.getElementById(priceId).textContent = `₹${total}`;
+    }
+
+    function addToCart(itemName, unitPrice, priceId, qtyButtonId) {
+      const qtyInput = document.querySelector(`#${qtyButtonId}`).previousElementSibling.querySelector('input');
+      const quantity = parseInt(qtyInput.value) || 1;
+      const total = unitPrice * quantity;
+
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+      cart.push({ name: itemName, total: unitPrice, quantity: quantity });
+      localStorage.setItem("cart", JSON.stringify(cart));
+
+      const alertBox = document.createElement("div");
+      alertBox.className = "custom-alert";
+      alertBox.textContent = `${itemName} (${quantity}) added to your order!`;
+      document.body.appendChild(alertBox);
+      setTimeout(() => alertBox.remove(), 2500);
+    }
+  </script>
+</body>
+</html>

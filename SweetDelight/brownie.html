@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Brownies | Sweet Delights</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .toast {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background-color: #caae62;
+      color: white;
+      padding: 1rem 1.5rem;
+      border-radius: 10px;
+      font-weight: bold;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease, transform 0.4s ease;
+      transform: translateY(20px);
+      z-index: 999;
+    }
+
+    .toast.show {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    .product-card input[type="number"] {
+      margin-top: 8px;
+      padding: 4px;
+      width: 60px;
+    }
+  </style>
+</head>
+<body>
+  <header class="navbar">
+    <div class="logo">
+      <img src="images/bakery.png" alt="Bakery Logo">
+      Sweet Delights
+    </div>
+  </header>
+
+  <section class="featured">
+    <h2>Our Brownie Collection</h2>
+    <div class="product-grid">
+
+      <!-- Classic Chocolate Brownie -->
+      <div class="product-card">
+        <img src="images/classic_brownie.jpg" alt="Classic Chocolate Brownie">
+        <h3>Classic Brownie</h3>
+        <p>Fudgy and rich chocolate brownie with a crackly top.</p>
+        <p><strong>₹90</strong></p>
+        <input type="number" id="qty1" min="1" value="1">
+        <button onclick="addToCart('Classic Chocolate Brownie', 90, 'qty1')">Order</button>
+      </div>
+
+      <!-- Walnut Brownie -->
+      <div class="product-card">
+        <img src="images/walnut_brownie.jpg" alt="Walnut Brownie">
+        <h3>Walnut Brownie</h3>
+        <p>Crunchy walnuts meet gooey chocolate in this classic twist.</p>
+        <p><strong>₹100</strong></p>
+        <input type="number" id="qty2" min="1" value="1">
+        <button onclick="addToCart('Walnut Brownie', 100, 'qty2')">Order</button>
+      </div>
+
+      <!-- Cheesecake Brownie -->
+      <div class="product-card">
+        <img src="images/cheesecake_brownie.jpg" alt="Cheesecake Brownie">
+        <h3>Cheesecake Brownie</h3>
+        <p>A perfect swirl of cheesecake layered into rich chocolate brownie.</p>
+        <p><strong>₹110</strong></p>
+        <input type="number" id="qty3" min="1" value="1">
+        <button onclick="addToCart('Cheesecake Brownie', 110, 'qty3')">Order</button>
+      </div>
+
+      <!-- Nutella Brownie -->
+      <div class="product-card">
+        <img src="images/nutella_brownie.jpg" alt="Nutella Brownie">
+        <h3>Nutella Brownie</h3>
+        <p>Indulgent hazelnut Nutella blended into our fudgiest brownie yet.</p>
+        <p><strong>₹115</strong></p>
+        <input type="number" id="qty4" min="1" value="1">
+        <button onclick="addToCart('Nutella Brownie', 115, 'qty4')">Order</button>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <p>&copy; 2025 <strong>Sweet Delights Bakery</strong> | Made with ❤️ and butter.</p>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    function addToCart(itemName, itemPrice, qtyId) {
+      const quantity = parseInt(document.getElementById(qtyId).value);
+      const totalPrice = itemPrice * quantity;
+
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      cart.push({ name: itemName, price: totalPrice, quantity: quantity });
+      localStorage.setItem("cart", JSON.stringify(cart));
+
+      showToast(`${itemName} (x${quantity}) added to your order!`);
+    }
+
+    function showToast(message) {
+      const toast = document.getElementById("toast");
+      toast.textContent = message;
+      toast.classList.add("show");
+      setTimeout(() => toast.classList.remove("show"), 2500);
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cookies | Sweet Delights</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .toast {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background-color: #caae62;
+      color: white;
+      padding: 1rem 1.5rem;
+      border-radius: 10px;
+      font-weight: bold;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease, transform 0.4s ease;
+      transform: translateY(20px);
+      z-index: 999;
+    }
+
+    .toast.show {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    .product-card input[type="number"] {
+      margin-top: 8px;
+      padding: 4px;
+      width: 60px;
+    }
+  </style>
+</head>
+<body>
+  <header class="navbar">
+    <div class="logo">
+      <img src="images/bakery.png" alt="Bakery Logo">
+      Sweet Delights
+    </div>
+  </header>
+
+  <section class="featured">
+    <h2>Our Cookies</h2>
+    <div class="product-grid">
+
+      <!-- Cookie 1 -->
+      <div class="product-card">
+        <img src="images/chocochipcookie.jpg" alt="Chocolate Chip Cookie">
+        <h3>Chocolate Chip</h3>
+        <p>Classic cookie with gooey chocolate chunks.</p>
+        <p><strong>₹60</strong></p>
+        <input type="number" id="qty1" min="1" value="1" />
+        <button onclick="addToCart('Chocolate Chip Cookie', 60, 'qty1')">Order</button>
+      </div>
+
+      <!-- Cookie 2 -->
+      <div class="product-card">
+        <img src="images/oatmealraisin.jpg" alt="Oatmeal Raisin Cookie">
+        <h3>Oatmeal Raisin</h3>
+        <p>Chewy cookie packed with oats and sweet raisins.</p>
+        <p><strong>₹55</strong></p>
+        <input type="number" id="qty2" min="1" value="1" />
+        <button onclick="addToCart('Oatmeal Raisin Cookie', 55, 'qty2')">Order</button>
+      </div>
+
+      <!-- Cookie 3 -->
+      <div class="product-card">
+        <img src="images/doublechocolate.jpg" alt="Double Chocolate Cookie">
+        <h3>Double Chocolate</h3>
+        <p>Rich cocoa cookie with chocolate chips inside.</p>
+        <p><strong>₹65</strong></p>
+        <input type="number" id="qty3" min="1" value="1" />
+        <button onclick="addToCart('Double Chocolate Cookie', 65, 'qty3')">Order</button>
+      </div>
+
+      <!-- Cookie 4 -->
+      <div class="product-card">
+        <img src="images/peanutbutter.jpg" alt="Peanut Butter Cookie">
+        <h3>Peanut Butter</h3>
+        <p>Nutty delight with a perfect chewy center.</p>
+        <p><strong>₹60</strong></p>
+        <input type="number" id="qty4" min="1" value="1" />
+        <button onclick="addToCart('Peanut Butter Cookie', 60, 'qty4')">Order</button>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <p>&copy; 2025 <strong>Sweet Delights Bakery</strong> | Made with ❤️ and butter.</p>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    function addToCart(itemName, itemPrice, qtyId) {
+      const quantity = parseInt(document.getElementById(qtyId).value);
+      const totalPrice = itemPrice * quantity;
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      cart.push({ name: itemName, price: totalPrice, quantity: piece });
+      localStorage.setItem("cart", JSON.stringify(cart));
+      showToast(`${itemName} (x${quantity}) added to your order!`);
+    }
+
+    function showToast(message) {
+      const toast = document.getElementById("toast");
+      toast.textContent = message;
+      toast.classList.add("show");
+      setTimeout(() => toast.classList.remove("show"), 2500);
+    }
+  </script>
+</body>
+</html>

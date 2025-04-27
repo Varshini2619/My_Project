@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Doughnuts | Sweet Delights</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .toast {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background-color: #caae62;
+      color: white;
+      padding: 1rem 1.5rem;
+      border-radius: 10px;
+      font-weight: bold;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease, transform 0.4s ease;
+      transform: translateY(20px);
+      z-index: 999;
+    }
+
+    .toast.show {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    .product-card input[type="number"] {
+      margin-top: 8px;
+      padding: 4px;
+      width: 60px;
+    }
+  </style>
+</head>
+<body>
+  <header class="navbar">
+    <div class="logo">
+      <img src="images/bakery.png" alt="Bakery Logo">
+      Sweet Delights
+    </div>
+  </header>
+
+  <section class="featured">
+    <h2>Irresistible Doughnuts</h2>
+    <div class="product-grid">
+
+      <!-- Classic Glazed Doughnut -->
+      <div class="product-card">
+        <img src="images/classic_doughnut.jpg" alt="Classic Glazed">
+        <h3>Classic Glazed</h3>
+        <p>Soft, fluffy doughnut with a shiny sugar glaze.</p>
+        <p><strong>₹45</strong></p>
+        <input type="number" id="qty1" min="1" value="1">
+        <button onclick="addToCart('Classic Glazed Doughnut', 45, 'qty1')">Order</button>
+      </div>
+
+      <!-- Chocolate Frosted Doughnut -->
+      <div class="product-card">
+        <img src="images/choco_doughnut.jpg" alt="Chocolate Frosted">
+        <h3>Chocolate Frosted</h3>
+        <p>Dipped in rich chocolate and topped with colorful sprinkles.</p>
+        <p><strong>₹55</strong></p>
+        <input type="number" id="qty2" min="1" value="1">
+        <button onclick="addToCart('Chocolate Frosted Doughnut', 55, 'qty2')">Order</button>
+      </div>
+
+      <!-- Strawberry Filled Doughnut -->
+      <div class="product-card">
+        <img src="images/strawberry_doughnut.jpg" alt="Strawberry Filled">
+        <h3>Strawberry Filled</h3>
+        <p>Filled with real strawberry jam and dusted with sugar.</p>
+        <p><strong>₹60</strong></p>
+        <input type="number" id="qty3" min="1" value="1">
+        <button onclick="addToCart('Strawberry Filled Doughnut', 60, 'qty3')">Order</button>
+      </div>
+
+      <!-- Custard Filled Doughnut -->
+      <div class="product-card">
+        <img src="images/custard_doughnut.jpg" alt="Custard Filled">
+        <h3>Custard Filled</h3>
+        <p>Creamy vanilla custard inside with a chocolate glaze topping.</p>
+        <p><strong>₹65</strong></p>
+        <input type="number" id="qty4" min="1" value="1">
+        <button onclick="addToCart('Custard Filled Doughnut', 65, 'qty4')">Order</button>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <p>&copy; 2025 <strong>Sweet Delights Bakery</strong> | Fresh, Fluffy & Fabulous!</p>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    function addToCart(itemName, itemPrice, qtyId) {
+      const quantity = parseInt(document.getElementById(qtyId).value);
+      const totalPrice = itemPrice * quantity;
+
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      cart.push({ name: itemName, price: totalPrice, quantity: quantity });
+      localStorage.setItem("cart", JSON.stringify(cart));
+
+      showToast(`${itemName} (x${quantity}) added to your order!`);
+    }
+
+    function showToast(message) {
+      const toast = document.getElementById("toast");
+      toast.textContent = message;
+      toast.classList.add("show");
+      setTimeout(() => toast.classList.remove("show"), 2500);
+    }
+  </script>
+</body>
+</html>
