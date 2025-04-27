@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sweet Delights Bakery</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="navbar">
+    <div class="logo">
+      <img src="images/bakery.png" alt="Bakery Logo">
+      Sweet Delights
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-text">
+      <h1>Freshly Baked Happiness</h1>
+      <p>Delicious cakes, pastries & more crafted with love.</p>
+      <a href="products.html" class="btn">Shop Now</a>
+    </div>
+  </section>
+
+  <section class="featured">
+    <h2>Our Specials</h2>
+    <div class="product-grid">
+
+      <!-- Product 1 -->
+      <div class="product-card">
+        <a href="cake.html">
+          <img src="images/cake.jpg" alt="Chocolate Cake">
+          <h3>Cake</h3>
+        </a>
+        <button onclick="addToCart('Cake')">Order</button>
+      </div>
+
+      <!-- Product 2 -->
+      <div class="product-card">
+        <a href="pastry.html">
+          <img src="images/pastry.jpg" alt="Red Velvet">
+          <h3>Pastry</h3>
+        </a>
+        <button onclick="addToCart('Pastry')">Order</button>
+      </div>
+
+      <!-- Product 3 -->
+      <div class="product-card">
+        <a href="croissant.html">
+          <img src="images/croissant.jpg" alt="Croissant">
+          <h3>Croissant</h3>
+        </a>
+        <button onclick="addToCart('Croissant')">Order</button>
+      </div>
+
+      <!-- Product 4 -->
+      <div class="product-card">
+        <a href="cupcake.html">
+          <img src="images/cupcake.jpg" alt="Cupcake">
+          <h3>Cupcake</h3>
+        </a>
+        <button onclick="addToCart('Cupcake')">Order</button>
+      </div>
+
+      <!-- Product 5 -->
+      <div class="product-card">
+        <a href="Cookie.html">
+          <img src="images/cookie.jpg" alt="Cheesecake">
+          <h3>Cookie</h3>
+        </a>
+        <button onclick="addToCart('Cookie')">Order</button>
+      </div>
+
+      <div class="product-card">
+        <a href="IceCream.html">
+          <img src="images/icecream.jpg" alt="Cheesecake">
+          <h3>IceCream</h3>
+        </a>
+        <button onclick="addToCart('icecream')">Order</button>
+      </div>
+
+      <div class="product-card">
+        <a href="doughnut.html">
+          <img src="images/doughnut.jpg" alt="Cheesecake">
+          <h3>Doughnut</h3>
+        </a>
+        <button onclick="addToCart('doughnut')">Order</button>
+      </div>
+
+      <div class="product-card">
+        <a href="brownie.html">
+          <img src="images/brownie.jpg" alt="Cheesecake">
+          <h3>Brownie</h3>
+        </a>
+        <button onclick="addToCart('brownie')">Order</button>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Sweet Delights Bakery. All rights reserved.</p>
+  </footer>
+
+  <script>
+    function addToCart(productName) {
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      cart.push(productName);
+      localStorage.setItem("cart", JSON.stringify(cart));
+      alert(`${productName} added to cart!`);
+    }
+  </script>
+</body>
+</html>
