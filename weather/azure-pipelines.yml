@@ -1,0 +1,56 @@
+trigger:
+- main  # Trigger on commits to the main branch
+
+variables:
+  azureSubscription: 'Your-Azure-Connection'  # Your Azure service connection
+  appName: 'YourAppName'  # Your Azure web app name
+  resourceGroup: 'YourResourceGroup'  # Your resource group name
+  stagingSlot: 'staging'  # Staging slot name
+  productionSlot: 'production'  # Production slot name
+  healthCheckUrl: 'https://yourappname-staging.azurewebsites.net/health'  # Health check URL
+
+stages:
+- stage: DeployToStaging
+  jobs:
+  - job: Deploy
+    displayName: 'Deploy to Staging Slot'
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - task: AzureWebApp@1
+      inputs:
+        azureSubscription: $(azureSubscription)
+        appName: $(appName)
+        package: '$(System.DefaultWorkingDirectory)/_your-repo-path/drop/*.zip'  # Path to the deployment package
+        slotName: $(stagingSlot)
+        resourceGroupName: $(resourceGroup)
+        deploymentMethod: 'auto'  # Use 'auto' for automatic deployment
+
+- stage: HealthCheckAndSwap
+  dependsOn: DeployToStaging
+  jobs:
+  - job: HealthCheck
+    displayName: 'Run Health Check and Swap to Production'
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - script: |
+        echo "Running health check for staging slot"
+        curl --silent --fail $(healthCheckUrl) || exit 1  # If curl fails, exit with an error
+      displayName: 'Run Health Check'
+      
+  - job: SwapToProduction
+    dependsOn: HealthCheck
+    condition: succeeded('HealthCheck')  # Only run this if the health check passes
+    displayName: 'Swap Staging Slot to Production'
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - task: AzureWebAppSlotSwap@1
+      inputs:
+        azureSubscription: $(azureSubscription)
+        appName: $(appName)
+        resourceGroupName: $(resourceGroup)
+        sourceSlot: $(stagingSlot)
+        targetSlot: $(productionSlot)
+        action: 'swap'
