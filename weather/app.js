@@ -103,4 +103,24 @@ function displayWeather(data, locationName) {
 app.get('/health', (req, res) => {
     res.status(200).send('OK');
 });
+const express = require('express');
+const app = express();
+
+app.use(express.static('public')); // If you have static assets like HTML, CSS, etc.
+
+// Health check route
+app.get('/health', (req, res) => {
+    res.status(200).send('OK');
+});
+
+// Other routes like your weather API or front-end
+app.get('/weather', (req, res) => {
+    // Handle your weather logic
+});
+
+// Start server
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
+});
 
