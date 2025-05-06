@@ -96,3 +96,11 @@ function displayWeather(data, locationName) {
     // Display the location name
     document.getElementById('location').value = locationName;
 }
+
+// Assuming you're using Express.js for your weather app
+
+// Health check route to monitor app's health
+app.get('/health', (req, res) => {
+    res.status(200).send('OK');
+});
+
