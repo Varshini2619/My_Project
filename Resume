@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Varshini Babu R - Resume</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #1e293b;
+      color: #333;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .resume-container {
+      background-color: #ffffff;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 0 25px rgba(0, 0, 0, 0.2);
+      max-width: 900px;
+      margin: 40px auto;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .header h1 {
+      font-weight: bold;
+    }
+
+    .section-title {
+      border-bottom: 2px solid #1f202207;
+      margin-bottom: 10px;
+      font-size: 1.4rem;
+      color: #0d6efd;
+    }
+
+    .skill-bar {
+      margin-bottom: 10px;
+    }
+
+    .skill-name {
+      margin-bottom: 5px;
+      font-weight: 500;
+    }
+
+    .progress-bar {
+      background-color: #0d6efd;
+    }
+
+    .btn-download {
+      background-color: #0d6efd;
+      border: none;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 10px;
+      float: right;
+      margin-top: -50px;
+    }
+
+    @media print {
+      .btn-download {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="resume-container">
+  <div class="header">
+    <h1>Varshini Babu R</h1>
+    <p>
+      <a href="mailto:varshinibabu458@gmail.com">varshinibabu458@gmail.com</a> |
+      +91 6380366554<br>
+      <a href="https://linkedin.com/in/varshini-babu-r26" target="_blank">LinkedIn</a> |
+      <a href="https://github.com/Varshini261" target="_blank">GitHub</a>
+    </p>
+    <button class="btn-download" onclick="window.print()">Download as PDF</button>
+  </div>
+
+  <div>
+    <h2 class="section-title">Objective</h2>
+    <p>Java Full Stack Web Developer with experience in web development, responsive design, and AI integration. Proficient in HTML, CSS, JavaScript, Java, and modern frameworks, with strong OOPs and database skills.</p>
+  </div>
+
+  <div>
+    <h2 class="section-title">Education</h2>
+    <ul>
+      <li><strong>Bachelor of Information Technology</strong> – 8.1 (Sep 2022 – May 2026)<br>Kingston Engineering College</li>
+      <li><strong>HSC</strong> – 89% (June 2020 – May 2021)<br>Shiksha Kendra Matric Hr.Sec.School</li>
+      <li><strong>SSLC</strong> – 84% (June 2018 – May 2019)<br>Seventh Day Adventist Matric Hr.Sec.School</li>
+    </ul>
+  </div>
+
+  <div>
+    <h2 class="section-title">Skill Summary</h2>
+
+    <div class="skill-bar">
+      <div class="skill-name">Java</div>
+      <div class="progress"><div class="progress-bar" style="width: 90%">90%</div></div>
+    </div>
+    <div class="skill-bar">
+      <div class="skill-name">HTML, CSS</div>
+      <div class="progress"><div class="progress-bar" style="width: 95%">95%</div></div>
+    </div>
+    <div class="skill-bar">
+      <div class="skill-name">JavaScript</div>
+      <div class="progress"><div class="progress-bar" style="width: 85%">85%</div></div>
+    </div>
+    <div class="skill-bar">
+      <div class="skill-name">React</div>
+      <div class="progress"><div class="progress-bar" style="width: 50%">50%</div></div>
+    </div>
+    <div class="skill-bar">
+      <div class="skill-name">Node.js</div>
+      <div class="progress"><div class="progress-bar" style="width: 40%">40%</div></div>
+    </div>
+    <p><strong>Soft Skills:</strong> Teamwork, Time Management, Leadership, Critical Thinking, Communication</p>
+    <p><strong>Tools:</strong> GitHub, Figma, Blender<br><strong>Editors:</strong> VS Code, Eclipse</p>
+  </div>
+
+<div>
+    
+    <h2 class="section-title">Coding Profiles</h2>
+    <ul>
+      <li><a href="https://www.geeksforgeeks.org/user/varshini7tql/" target="_blank">GeeksforGeeks</a></li>
+        <li><a href="https://leetcode.com/VarshiniBabuR/" target="_blank">LeetCode</a></li>
+        <li><a href="https://www.hackerrank.com/varshinibabu458" target="_blank">HackerRank</a></li>
+        <li><a href="https://www.codechef.com/users/varshu_26" target="_blank">CodeChef</a></li>
+      </ul>
+</div>
+
+  <div>
+    <h2 class="section-title">Projects</h2>
+    <ul>
+      <li>Bakery Website</li>
+      <li>Tic Tac Toe Game</li>
+      <li>Ecommerce Page</li>
+      <li>Food App</li>
+      <li>Weather App</li>
+      <li>Stop Watch</li>
+    </ul>
+  </div>
+
+  <div>
+    <h2 class="section-title">Languages</h2>
+    <ul>
+      <li>Tamil – Intermediate</li>
+      <li>English – Intermediate</li>
+      <li>Hindi – Intermediate</li>
+    </ul>
+  </div>
+
+  <div>
+    <h2 class="section-title">Internships</h2>
+    <ul>
+      <li><strong>Prodigy Infotech – Web Development Intern</strong><br>Gained full-stack skills in HTML, CSS, JS, responsive design, database integration, and API handling.</li>
+      <li><strong>Internpe – UI/UX Design Intern</strong><br>Worked with Figma, Adobe XD; learned wireframing, prototyping, and usability testing.</li>
+      <li><strong>CodSoft – Java Intern</strong><br>Practiced core Java, OOPs, backend development, and debugging through real-world tasks.</li>
+    </ul>
+  </div>
+
+  <div>
+    <h2 class="section-title">Certifications</h2>
+    <ul>
+      <li><strong>NPTEL:</strong> Programming in Java – 73%</li>
+      <li><strong>Infosys SpringBoard:</strong> Java, Front End, OOPs, Python, NLP, AI</li>
+      <li><strong>Udemy:</strong> HTML & CSS3</li>
+      <li><strong>LinkedIn Learning:</strong> Web Dev & OOP</li>
+      <li><strong>Guvi:</strong> JavaScript – SAWIT.AI Learnathon</li>
+      <li><strong>NSDC:</strong> Web Design & Development</li>
+    </ul>
+  </div>
+</div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  
+</body>
+</html>
